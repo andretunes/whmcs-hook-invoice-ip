@@ -21,7 +21,7 @@ add_hook('InvoiceCreation', 1, function($vars) {
 
     foreach ($invoiceItems as $invoiceItem) {
         if ($invoiceItem->relid === 0) return;
-        if (!in_array($invoiceItem->type, $invoiceItem)) return;
+        if (!in_array($invoiceItem->type, $typeOfItems)) return;
         
         $dedicatedIP = Capsule::table('tblhosting')->where('id', $invoiceItem->relid)->value('dedicatedip');
 
