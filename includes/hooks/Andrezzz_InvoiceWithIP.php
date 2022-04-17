@@ -24,6 +24,7 @@ add_hook('InvoiceCreation', 1, function($vars) {
         if (!in_array($invoiceItem->type, $typeOfItems)) return;
         
         $dedicatedIP = Capsule::table('tblhosting')->where('id', $invoiceItem->relid)->value('dedicatedip');
+        if (empty($dedicatedIP)) return;
 
         Capsule::table('tblinvoiceitems')->where('id', $invoiceItem->id)->update(array(
             'description' => $invoiceItem->description . "\n" . $_LANG['primaryIP'] . ': ' . trim($dedicatedIP)
